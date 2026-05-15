@@ -39,7 +39,7 @@ class LagouScraper(BaseScraper):
     def _parse_list_page(self, html):
         jobs = []
         try:
-            soup = BeautifulSoup(html, "lxml")
+            soup = BeautifulSoup(html, "html.parser")
             job_cards = soup.select(".item__10RTO") or soup.select(".s_position_list .item_con_list li")
             for card in job_cards:
                 try:

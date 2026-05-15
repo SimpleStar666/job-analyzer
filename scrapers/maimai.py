@@ -39,7 +39,7 @@ class MaimaiScraper(BaseScraper):
     def _parse_list_page(self, html):
         jobs = []
         try:
-            soup = BeautifulSoup(html, "lxml")
+            soup = BeautifulSoup(html, "html.parser")
             job_cards = soup.select(".search-job-list .job-item") or soup.select("[class*='job-card']")
             for card in job_cards:
                 try:

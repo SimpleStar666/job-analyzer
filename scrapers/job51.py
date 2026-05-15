@@ -39,7 +39,7 @@ class Job51Scraper(BaseScraper):
     def _parse_list_page(self, html):
         jobs = []
         try:
-            soup = BeautifulSoup(html, "lxml")
+            soup = BeautifulSoup(html, "html.parser")
             job_cards = soup.select(".j_joblist .e") or soup.select(".joblist .job_item")
             for card in job_cards:
                 try:

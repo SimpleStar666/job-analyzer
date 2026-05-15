@@ -56,7 +56,7 @@ class BossScraper(BaseScraper):
     def _parse_list_page(self, html):
         jobs = []
         try:
-            soup = BeautifulSoup(html, "lxml")
+            soup = BeautifulSoup(html, "html.parser")
             job_cards = soup.select(".job-list-box .job-card-wrapper")
             if not job_cards:
                 job_cards = soup.select(".search-job-result .job-list li")

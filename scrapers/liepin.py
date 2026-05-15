@@ -51,7 +51,7 @@ class LiepinScraper(BaseScraper):
     def _parse_list_page(self, html):
         jobs = []
         try:
-            soup = BeautifulSoup(html, "lxml")
+            soup = BeautifulSoup(html, "html.parser")
             job_cards = soup.select(".so-job-list .job-info") or soup.select(".job-detail-box")
             if not job_cards:
                 job_cards = soup.select("[class*='job-list'] [class*='job-item']")
