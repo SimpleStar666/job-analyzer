@@ -14,9 +14,11 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, base_dir)
 sys.path.insert(0, os.path.join(base_dir, "web"))
 
+# 导入依赖，必要时安装
 try:
     import requests
     import flask
+    from bs4 import BeautifulSoup
 except ImportError:
     print("Installing dependencies...")
     import subprocess
@@ -25,24 +27,26 @@ except ImportError:
 print("Starting web server...")
 print()
 
+# 函数：打开浏览器
 def open_browser():
-    time.sleep(2)
-    print("Opening browser...")
+    time.sleep(1.5)
+    print("Opening browser automatically...")
     webbrowser.open("http://localhost:5000")
 
-# 启动浏览器
+# 在后台线程打开浏览器
 threading.Thread(target=open_browser, daemon=True).start()
 
-print("Server starting...")
-print("Your browser should open automatically.")
-print("If not, visit: http://localhost:5000")
+print("Server is starting up!")
+print("Your browser will open automatically shortly.")
+print("If not, please visit: http://localhost:5000")
 print()
-print("Press Ctrl+C to stop")
+print("Press Ctrl+C to stop the server")
 print()
 
-# 直接导入并运行Flask应用
+# 切换到正确目录并启动Flask
 os.chdir(base_dir)
 from web.app import app
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    # 关闭debug模式，避免重启问题
+    app.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
